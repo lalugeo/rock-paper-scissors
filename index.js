@@ -1,6 +1,5 @@
 const Game = require('./lib/control/game.js');
 
-let newGame;
 const rock = {
   name: 'rock',
   image: '/a/b/img1.png',
@@ -17,8 +16,8 @@ const scissors = {
   rank: 2,
 };
 
-newGame = new Game([rock, paper, scissors]);
+const newGame = new Game([rock, paper, scissors]);
 newGame.checkWhoWins('rock', 'scissors')
   .then((won) => {
-    console.log(JSON.stringify(won));
+    console.log(JSON.stringify(won)); // eslint-disable-line
   });
