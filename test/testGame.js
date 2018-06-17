@@ -19,7 +19,7 @@ const scissors = {
   image: '/a/b/img3.png',
   rank: 2,
 };
-describe('weapon class test', () => {
+describe('game class test', () => {
   before(() => {
     newGame = new Game([rock, paper, scissors]);
   });
