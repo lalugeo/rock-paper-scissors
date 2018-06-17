@@ -4,7 +4,7 @@
     },
     "source": {
         "includePattern": ".+\\.js$",
-        "excludePattern": "/node_modules/"
+        "excludePattern": "node_modules"
     },
     "templates": {
         "cleverLinks": true,
