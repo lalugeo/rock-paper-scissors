@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "linting": "./node_modules/.bin/gulp linting",
     "documentation": "./node_modules/.bin/gulp documentation",
     "test": "./node_modules/.bin/gulp unit-testing",
