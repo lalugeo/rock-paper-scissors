@@ -2,19 +2,76 @@
 <html data-ng-app="rpsApp" ng-csp="">
   <head>
     <title>Rock Paper scissors</title>
-    <link href="../css/googleapis_material_icons.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="../css/materialize/css/materialize.min.css"/>
+    <link href="lib/view/css/googleapis_material_icons.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="lib/view/css/materialize/css/materialize.min.css"/>
     <base target="_blank">
   </head>
 
   <body data-ng-controller="rpsController">
     <h5 class="center-align">New game</h5>
-    <a class="btn waves-effect waves-light orange" data-ng-click="StartGame()">
-      Start
-      <i class="material-icons right">send</i>
-    </a>
-    <script type="text/javascript" src="../ext_lib/jquery-3.2.1.min.js"></script>
-    <script src="../ext_lib/angular-1.5.6.min.js"></script>
-    <script type="text/javascript" src="../css/materialize/js/materialize.min.js"></script>
+    <ul class="collapsible">
+      <li>
+        <div class="collapsible-header">
+          <i class="large material-icons">{{player1.icon}}</i>
+          Player1 - {{player1.name}}
+        </div>
+        <div class="collapsible-body">
+          <form class="col s12">
+            <div class="row">
+              <input placeholder="Player1 Name" id="player1_name" type="text" ng-model="player1.name" ng-disabled="player1.type === 'machine'">
+            </div>
+            <div class="row">
+              <label>Type of player</label>
+              <div class="input-field col s12">
+                <select ng-model="player1.type" ng-change="setPlayer1Type(player1.type)">
+                  <option value="human" selected>Human</option>
+                  <option value="machine">Machine</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">
+          <i class="large material-icons">{{player2.icon}}</i>
+          Player2 - {{player2.name}}
+        </div>
+        <div class="collapsible-body">
+          <form class="col s12">
+            <div class="row">
+              <input placeholder="Player2 Name" id="player2_name" type="text" ng-model="player2.name" ng-disabled="player2.type === 'machine'">
+            </div>
+            <div class="row">
+              <label>Type of player</label>
+              <div class="input-field col s12">
+                <select ng-model="player2.type" ng-change="setPlayer2Type(player2.type)">
+                  <option value="human">Human</option>
+                  <option value="machine" selected>Machine</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>
+    <div class="center-align">
+      <a class="btn waves-effect waves-light orange" data-ng-click="startMatch()">
+        Start
+        <i class="material-icons right">send</i>
+      </a>
+    </div>
+
+    <script type="text/javascript" src="lib/view/ext_lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/view/ext_lib/angular-1.5.6.min.js"></script>
+    <script type="text/javascript" src="lib/view/css/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript">
+      (function($){
+        $(document).ready(function(){
+          $('select').material_select();
+        });
+      })(jQuery);
+    </script>
+    <script type="text/javascript" src="lib/view/js/gameLogic.js"></script>
   </body>
 </html>

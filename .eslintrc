@@ -14,6 +14,7 @@
   }
  },
  "rules": {
+   "no-param-reassign": [2, { "props": false }],
    "linebreak-style": [0, "error", "windows"],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
