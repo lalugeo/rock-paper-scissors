@@ -1,0 +1,42 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "linting": "./node_modules/.bin/gulp linting",
+    "documentation": "./node_modules/.bin/gulp documentation",
+    "test": "./node_modules/.bin/gulp unit-testing",
+    "coverage": "./node_modules/.bin/nyc npm run test",
+    "send_coverage": "./node_modules/.bin/nyc report --reporter=text-lcov|\"./node_modules/.bin/coveralls\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lalugeo/rock-paper-scissors.git"
+  },
+  "author": "lalugeorge88@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lalugeo/rock-paper-scissors/issues"
+  },
+  "homepage": "https://github.com/lalugeo/rock-paper-scissors#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.1",
+    "docdash": "^0.4.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.2",
+    "gulp-jsdoc3": "^2.0.0",
+    "gulp-mocha": "^6.0.0",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
+  }
+}
