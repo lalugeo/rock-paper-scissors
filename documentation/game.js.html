@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-rock-paper-scissors_Game-Game.html">Game</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#addNewWeapon">addNewWeapon</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#addNewWeaponSync">addNewWeaponSync</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#checkWhoWins">checkWhoWins</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#clearWeapons">clearWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getCountOfWeapons">getCountOfWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getWeaponNamedAs">getWeaponNamedAs</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getWeapons">getWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#loadWeapons">loadWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#loadWeaponsSync">loadWeaponsSync</a></li></ul></li><li><a href="module-rock-paper-scissors_Weapon-Weapon.html">Weapon</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getImage">getImage</a></li><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getName">getName</a></li><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getRank">getRank</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-rock-paper-scissors_Game.html">rock-paper-scissors/Game</a></li><li><a href="module-rock-paper-scissors_Weapon.html">rock-paper-scissors/Weapon</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-rock-paper-scissors_Game-Game.html">Game</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#addNewWeapon">addNewWeapon</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#addNewWeaponSync">addNewWeaponSync</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#checkWhoWins">checkWhoWins</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#clearWeapons">clearWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getCountOfWeapons">getCountOfWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getWeaponNamedAs">getWeaponNamedAs</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getWeapons">getWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#loadWeapons">loadWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#loadWeaponsSync">loadWeaponsSync</a></li></ul></li><li><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></li><li><a href="module-rock-paper-scissors_MachinePlayer-MachinePlayer.html">MachinePlayer</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_MachinePlayer-MachinePlayer.html#selectWeapon">selectWeapon</a></li></ul></li><li><a href="module-rock-paper-scissors_Player-Player.html">Player</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Player-Player.html#getName">getName</a></li></ul></li><li><a href="module-rock-paper-scissors_Weapon-Weapon.html">Weapon</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getImage">getImage</a></li><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getName">getName</a></li><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getRank">getRank</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-rock-paper-scissors_Game.html">rock-paper-scissors/Game</a></li><li><a href="module-rock-paper-scissors_HumanPlayer.html">rock-paper-scissors/HumanPlayer</a></li><li><a href="module-rock-paper-scissors_MachinePlayer.html">rock-paper-scissors/MachinePlayer</a></li><li><a href="module-rock-paper-scissors_Player.html">rock-paper-scissors/Player</a></li><li><a href="module-rock-paper-scissors_Weapon.html">rock-paper-scissors/Weapon</a></li></ul>
 </nav>
 
 <div id="main">
@@ -127,21 +127,29 @@ class Game {
   }
 
   /**
-  * adds a new weapon by placing it in between beatBy weapon and beats weapon rank wise.
-  * @param {object} newWeapon - first player weapon involved in the game
+  * adds a new weapon by placing it in between ranks of beats and beatBy weapons.
+  * if the beats and beatBy weapons are not provided, new weapon is pushed to
+  * the end of the armoury
+  * @param {object} newWeapon - new weapon to add to the armoury
+  * @param {string} beatsName - @todo new weapon will beat this weapon mentioned by name
+  * @param {string} beatByName -@todo new weapon will be beat by this weapon mentioned by name
   * @returns {Promise} - resolving to the wepon newly inserted
   */
-  addNewWeapon(newWeapon) {
+  addNewWeapon(newWeapon) /* , beatsName, beatByName) */{
     this.weapons.push(newWeapon);
     return Promise.reoslve(newWeapon);
   }
 
   /**
-  * sync adds a new weapon by placing it in between beatBy weapon and beats weapon rank wise.
-  * @param {object} newWeapon - first player weapon involved in the game
+  * sync adds a new weapon by placing it in between ranks of beats and beatBy weapons.
+  * if the beats and beatBy weapons are not provided, new weapon is pushed to
+  * the end of the armoury
+  * @param {object} newWeapon - new weapon to add to the armoury
+  * @param {string} beatsName - @todo new weapon will beat this weapon mentioned by name
+  * @param {string} beatByName -@todo new weapon will be beat by this weapon mentioned by name
   * @returns {object} - the wepon newly inserted
   */
-  addNewWeaponSync(newWeapon) {
+  addNewWeaponSync(newWeapon) /* , beatsName, beatByName) */{
     this.weapons.push(newWeapon);
     return newWeapon;
   }
@@ -211,7 +219,7 @@ module.exports = Game;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jun 17 2018 11:33:08 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jun 17 2018 12:40:15 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "linting": "./node_modules/.bin/gulp linting",
+    "documentation": "./node_modules/.bin/gulp documentation",
     "test": "./node_modules/.bin/gulp unit-testing",
-    "coverage": "./node_modules/.bin/nyc npm run test"
+    "coverage": "./node_modules/.bin/nyc npm run test",
+    "send_coverage": "./node_modules/.bin/nyc report --reporter=text-lcov|\"./node_modules/.bin/coveralls\""
   },
   "repository": {
     "type": "git",

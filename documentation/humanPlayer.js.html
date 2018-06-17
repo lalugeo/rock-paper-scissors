@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>humanPlayer.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,25 +27,38 @@
 
 <div id="main">
     
+    <h1 class="page-title">humanPlayer.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Player = require('./player.js');
 
+/**
+* A human player class that represents a single player playing the game
+* @module rock-paper-scissors/HumanPlayer
+* @requires rock-paper-scissors/Player
+*/
+class HumanPlayer extends Player {
+  /**
+  * constructor for the HumanPlayer class
+  * @param {string} name - name of the human
+  * @constructor
+  */
+  constructor(name) {
+    super(name, 0);// luck of a human is never handed out, but decided by fate!!
+  }
+}
 
-
-
-
-
-
-
-
-    
-
-
-
+module.exports = HumanPlayer;
+</code></pre>
+        </article>
+    </section>
 
 
 
