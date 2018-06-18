@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="gameApp">
+  <head>
+    <script type="text/javascript" src="lib/view/ext_lib/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="lib/view/css/materialize/js/materialize.min.js"></script>
+    <script src="lib/view/ext_lib/angular-1.5.6.min.js"></script>
+    <script src="lib/view/ext_lib/angular-route-1.5.6.min.js"></script>
+    <script type="text/javascript">
+      (function($){
+        $(document).ready(function(){
+          $('select').material_select();
+        });
+      })(jQuery);
+    </script>
+  </head>
+  <body>
+
+    <div ng-view></div>
+
+    <script src="lib/view/js/gameLogic.js"></script>
+    <script src="lib/view/js/matchLogic.js"></script>
+
+  </body>
+</html>

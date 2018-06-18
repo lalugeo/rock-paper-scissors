@@ -54,6 +54,25 @@
           </form>
         </div>
       </li>
+      <li>
+        <div class="collapsible-header">
+          <i class="large material-icons">person</i>
+          Game - {{gameType}}
+        </div>
+        <div class="collapsible-body">
+          <form class="col s12">
+            <div class="row">
+              <label>Type of game</label>
+              <div class="input-field col s12">
+                <select ng-model="gameType"  ng-change="setGameType(gameType)">
+                  <option value="Basic">Basic</option>
+                  <option value="Extended">Extended</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
     </ul>
     <div class="center-align">
       <a class="btn waves-effect waves-light orange" data-ng-click="startMatch()">
