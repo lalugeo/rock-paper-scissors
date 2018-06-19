@@ -9,11 +9,7 @@ const server = http.createServer((req, resp) => {
     req.body = Buffer.concat(req.body).toString();
     if (req.url === '/') {
       routes('index')(req, resp);
-    } else if (req.url === '/newGame') {
-      routes('newGame')(req, resp);
-    } else if (req.url === '/match') {
-      routes('match')(req, resp);
-    }  else if (req.url.match(/\/css\//) || req.url.match(/\/ext_lib\//) || req.url.match(/\/view\/js\//)) {
+    } else if (req.url.match(/\/css\//) || req.url.match(/\/ext_lib\//) || req.url.match(/\/view\/js\//)) {
       routes('activeFile')(req, resp);
     } else if (req.url.match(/\/svc\/initialise/)) {
       routes('webServices').initialise(req, resp);
