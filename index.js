@@ -19,6 +19,8 @@ const server = http.createServer((req, resp) => {
       routes('webServices').fetchPlayers(req, resp);
     } else if (req.url.match(/\/svc\/chooseWeapon/)) {
       routes('webServices').chooseWeapon(req, resp);
+    } else if (req.url.match(/\/svc\/fetchResult/)) {
+      routes('webServices').fetchResult(req, resp);
     } else {
       resp.writeHead(404, { 'Content-Type': 'text/html' });
       resp.write('No such page found!');
