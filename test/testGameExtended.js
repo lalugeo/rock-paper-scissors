@@ -29,7 +29,7 @@ const lizard = {
   image: '/a/b/img5.png',
   rank: 4,
 };
-describe('weapon class test', () => {
+describe('extended game class test', () => {
   before(() => {
     newGame = new Game([rock, paper, scissors, spock, lizard]);
   });

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "rock",
+    "image": "/a/b/img1.png",
+    "rank": 0
+  },
+  {
+    "name": "paper",
+    "image": "/a/b/img2.png",
+    "rank": 1
+  },
+  {
+    "name": "scissors",
+    "image": "/a/b/img3.png",
+    "rank": 2
+  }
+]
