@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>rock-paper-scissors/HumanPlayer - Documentation</title>
+    <title>svc/fetchResult.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,142 +27,54 @@
 
 <div id="main">
     
-    <h1 class="page-title">rock-paper-scissors/HumanPlayer</h1>
+    <h1 class="page-title">svc/fetchResult.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const currentGame = require('../svc/currentGame.js');
+/**
+* The http request handler for fetching the results
+* of the currently played match
+* @param {object} req - the http request object
+* @param {object} res - the http response object
+* @returns {object} 200 OK if everything wenet well
+*/
+module.exports = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  const player1 = currentGame.game.getPlayer1();
+  const player2 = currentGame.game.getPlayer2();
+  if (player1.CheckIfMachine()) {
+    player1.selectWeapon(currentGame.game.getWeapons());
+  }
+  if (player2.CheckIfMachine()) {
+    player2.selectWeapon(currentGame.game.getWeapons());
+  }
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">A human player class that represents a single player playing the game</div>
-        
-
-        
-            
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="control_humanPlayer.js.html">control/humanPlayer.js</a>, <a href="control_humanPlayer.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li><a href="module-rock-paper-scissors_Player.html">module:rock-paper-scissors/Player</a></li>
-        </ul>
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+  currentGame.game.match()
+    .then((winner) => {
+      res.writeHead(200);
+      res.write(JSON.stringify({
+        winner: (winner) ? winner.getName() : 'A tie!',
+        result: `Player 1 - ${player1.getName()} chose ${player1.getChosenWeapon()}, Player 2 - ${player2.getName()} chose ${player2.getChosenWeapon()}`,
+      }));
+    })
+    .catch((e) => {
+      res.writeHead(500);
+      res.write(JSON.stringify({ error: e.message }));
+    })
+    .then(() => {
+      res.end();
+    });
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

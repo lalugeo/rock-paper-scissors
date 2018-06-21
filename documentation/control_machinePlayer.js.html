@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>rock-paper-scissors/HumanPlayer - Documentation</title>
+    <title>control/machinePlayer.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,142 +27,57 @@
 
 <div id="main">
     
-    <h1 class="page-title">rock-paper-scissors/HumanPlayer</h1>
+    <h1 class="page-title">control/machinePlayer.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Player = require('./player.js');
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">A human player class that represents a single player playing the game</div>
-        
+/**
+* A human player class that represents a single player playing the game
+* @module rock-paper-scissors/MachinePlayer
+* @requires rock-paper-scissors/Player
+*/
+class MachinePlayer extends Player {
+  /**
+  * constructor for the MachinePlayer class
+  * @param {integer} luck - integer representing the luck (which
+  * controls the weapons avaialble to this machine)
+  * @constructor
+  */
+  constructor(luck) {
+    const machineid = process.hrtime()[1].toString().slice(-3);
+    super(`turing-machine-${machineid}`, luck, true);//  luck of machines is not depended on fate!!
+  }
 
-        
-            
+  /**
+  * randomly select a weapon from the armoury based on the luck
+  * @param {array} armoury array of weapons in this game
+  * @returns {string} name of a weapon
+  */
+  selectWeapon(armoury) {
+    //  higher luck means higher ranked weapons are returned, and no lower ranked weapons
+    const availableWeaponsStart = (this.luck >= armoury.length) ? armoury.length - 1 : this.luck;
+    const availableWeaponsEnd = armoury.length;
+    const seed = process.hrtime()[1].toString().slice(-3);
+    const randomeNumber = Math.random(seed);
+    const randomWeaponIndex = Math.floor((randomeNumber *//   generate a random
+        (availableWeaponsEnd - availableWeaponsStart)) +//    number between availableWeaponsStart
+                  availableWeaponsStart);//                   and availableWeaponsEnd
+    return this.setChosenWeapon(armoury[randomWeaponIndex].getName());
+  }
+}
 
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="control_humanPlayer.js.html">control/humanPlayer.js</a>, <a href="control_humanPlayer.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li><a href="module-rock-paper-scissors_Player.html">module:rock-paper-scissors/Player</a></li>
-        </ul>
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = MachinePlayer;
+</code></pre>
+        </article>
+    </section>
 
 
 

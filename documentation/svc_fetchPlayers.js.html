@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>rock-paper-scissors/HumanPlayer - Documentation</title>
+    <title>svc/fetchPlayers.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,142 +27,44 @@
 
 <div id="main">
     
-    <h1 class="page-title">rock-paper-scissors/HumanPlayer</h1>
+    <h1 class="page-title">svc/fetchPlayers.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">A human player class that represents a single player playing the game</div>
-        
-
-        
-            
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="control_humanPlayer.js.html">control/humanPlayer.js</a>, <a href="control_humanPlayer.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li><a href="module-rock-paper-scissors_Player.html">module:rock-paper-scissors/Player</a></li>
-        </ul>
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const currentGame = require('../svc/currentGame.js');
+/**
+* The http request handler for fetching the list of
+* players involved in the current game
+* @param {object} req - the http request object
+* @param {object} res - the http response object
+* @returns {object} 200 OK with the list of players if everything wenet well
+*/
+module.exports = (req, res) => {
+  let status = 200;
+  let players;
+  res.setHeader('Content-Type', 'application/json');
+  try {
+    players = JSON.stringify({
+      player1: currentGame.game.getPlayer1(),
+      player2: currentGame.game.getPlayer2(),
+    });
+  } catch (e) {
+    players = JSON.stringify({ error: e.message });
+    status = 500;
+  }
+  res.writeHead(status);
+  res.write(players);
+  res.end();
+};
+</code></pre>
+        </article>
+    </section>
 
 
 
