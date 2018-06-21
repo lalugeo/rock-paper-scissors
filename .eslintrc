@@ -1,0 +1,33 @@
+{
+ "env": {
+  "es6": true,
+  "node": true,
+  "browser": true
+ },
+ "extends": "airbnb",
+ "parserOptions": {
+  "ecmaVersion": 6,
+  "sourceType": "module",
+  "ecmaFeatures": {
+   "jsx": true,
+   "experimentalObjectRestSpread": true
+  }
+ },
+ "rules": {
+   "no-param-reassign": [2, { "props": false }],
+   "linebreak-style": [0, "error", "windows"],
+    "valid-jsdoc": ["error", {
+      "requireReturn": true,
+      "requireReturnType": true,
+      "requireParamDescription": true,
+      "requireReturnDescription": true
+    }],
+    "require-jsdoc": ["error", {
+        "require": {
+            "FunctionDeclaration": true,
+            "MethodDefinition": true,
+            "ClassDeclaration": true
+        }
+    }]
+  }
+}

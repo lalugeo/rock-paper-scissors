@@ -1,0 +1,147 @@
+<!doctype html>
+<html ng-app="rpsApp">
+  <head>
+    <link href="lib/view/css/googleapis_material_icons.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="lib/view/css/materialize/css/materialize.min.css"/>
+    <script type="text/javascript" src="lib/view/ext_lib/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="lib/view/css/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="lib/view/ext_lib/angular-1.5.6.min.js"></script>
+    <script type="text/javascript" src="lib/view/ext_lib/angular-route-1.5.6.min.js"></script>
+    <base target="_blank">
+    <script type="text/javascript" src="lib/view/js/config.js"></script>
+  </head>
+  <body>
+    <script type="text/ng-template" id="game">
+      <h5 class="center-align">New game</h5>
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header">
+            <i class="large material-icons">{{player1.icon}}</i>
+            Player1 - {{player1.name}}
+          </div>
+          <div class="collapsible-body">
+            <form class="col s12">
+              <div class="row">
+                <input placeholder="Player1 Name" id="player1_name" type="text" ng-model="player1.name" ng-disabled="player1.type === 'machine'">
+              </div>
+              <div class="row">
+                <label>Type of player</label>
+                <div class="input-field col s12">
+                  <select ng-model="player1.type" ng-change="setPlayer1Type(player1.type)">
+                    <option value="human" selected>Human</option>
+                    <option value="machine">Machine</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="large material-icons">{{player2.icon}}</i>
+            Player2 - {{player2.name}}
+          </div>
+          <div class="collapsible-body">
+            <form class="col s12">
+              <div class="row">
+                <input placeholder="Player2 Name" id="player2_name" type="text" ng-model="player2.name" ng-disabled="player2.type === 'machine'">
+              </div>
+              <div class="row">
+                <label>Type of player</label>
+                <div class="input-field col s12">
+                  <select ng-model="player2.type" ng-change="setPlayer2Type(player2.type)">
+                    <option value="human">Human</option>
+                    <option value="machine" selected>Machine</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="large material-icons">settings</i>
+            Game - {{gameType}} with Level {{gameLevel}}
+          </div>
+          <div class="collapsible-body">
+            <form class="col s12">
+              <div class="row">
+                <label>Type of game</label>
+                <div class="input-field col s12">
+                  <select ng-model="gameType"  ng-change="setGameType(gameType)">
+                    <option value="Basic">Basic</option>
+                    <option value="Extended">Extended</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <label>Difficulty of game</label>
+                  <div class="input-field col s12">
+                    <select ng-model="gameLevel"  ng-change="setGameLevel(gameLevel)">
+                      <option value="0">Level 0</option>
+                      <option value="1">Level 1</option>
+                      <option value="2">Level 2</option>
+                      <option value="3">Level 3</option>
+                      <option value="4">Level 4</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+      </ul>
+      <div class="center-align">
+        <a class="btn waves-effect waves-light orange" data-ng-click="startMatch()">
+          Start
+          <i class="material-icons right">send</i>
+        </a>
+      </div>
+    </script>
+
+    <script type="text/ng-template" id="match">
+        <h5 class="center-align">Match</h5>
+        <nav>
+          <div class="nav-wrapper">
+            <a>{{moveText}}</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="#/">New Game</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="collection">
+            <a class="collection-item" data-ng-click="ChooseWeaponPlayer(weapon.name)" data-ng-repeat="weapon in armoury track by weapon.name">{{weapon.name}}</a>
+        </div>
+    </script>
+    <script type="text/ng-template" id="result">
+        <h5 class="center-align">Match</h5>
+        <nav>
+          <div class="nav-wrapper">
+            <a>Match finished</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="#/">New Game</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="row">
+          <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <!--span class="card-title">{{winner}}</span-->
+                <p>{{result}}</p>
+              </div>
+              <div class="card-action">
+                <a>Winner is</a>
+                <a>{{winner}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </script>
+    <div ng-view>
+    </div>
+
+    <script src="lib/view/js/gameLogic.js"></script>
+    <script src="lib/view/js/matchLogic.js"></script>
+    <script src="lib/view/js/resultLogic.js"></script>
+  </body>
+</html>

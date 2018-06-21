@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>control/machinePlayer.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-rock-paper-scissors_Game-Game.html">Game</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#addNewWeapon">addNewWeapon</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#addNewWeaponSync">addNewWeaponSync</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#checkWhoWins">checkWhoWins</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#clearWeapons">clearWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getCountOfWeapons">getCountOfWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getPlayer1">getPlayer1</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getPlayer2">getPlayer2</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getWeaponNamedAs">getWeaponNamedAs</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#getWeapons">getWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#loadWeapons">loadWeapons</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#loadWeaponsSync">loadWeaponsSync</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#match">match</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#setPlayer1">setPlayer1</a></li><li data-type='method'><a href="module-rock-paper-scissors_Game-Game.html#setPlayer2">setPlayer2</a></li></ul></li><li><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></li><li><a href="module-rock-paper-scissors_MachinePlayer-MachinePlayer.html">MachinePlayer</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_MachinePlayer-MachinePlayer.html#selectWeapon">selectWeapon</a></li></ul></li><li><a href="module-rock-paper-scissors_Player-Player.html">Player</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Player-Player.html#CheckIfMachine">CheckIfMachine</a></li><li data-type='method'><a href="module-rock-paper-scissors_Player-Player.html#getChosenWeapon">getChosenWeapon</a></li><li data-type='method'><a href="module-rock-paper-scissors_Player-Player.html#getName">getName</a></li><li data-type='method'><a href="module-rock-paper-scissors_Player-Player.html#setChosenWeapon">setChosenWeapon</a></li></ul></li><li><a href="module-rock-paper-scissors_Weapon-Weapon.html">Weapon</a><ul class='methods'><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getImage">getImage</a></li><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getName">getName</a></li><li data-type='method'><a href="module-rock-paper-scissors_Weapon-Weapon.html#getRank">getRank</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-rock-paper-scissors_Game.html">rock-paper-scissors/Game</a></li><li><a href="module-rock-paper-scissors_HumanPlayer.html">rock-paper-scissors/HumanPlayer</a></li><li><a href="module-rock-paper-scissors_MachinePlayer.html">rock-paper-scissors/MachinePlayer</a></li><li><a href="module-rock-paper-scissors_Player.html">rock-paper-scissors/Player</a></li><li><a href="module-rock-paper-scissors_Weapon.html">rock-paper-scissors/Weapon</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getTime">getTime</a></li><li><a href="global.html#value">value</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">control/machinePlayer.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Player = require('./player.js');
+
+/**
+* A human player class that represents a single player playing the game
+* @module rock-paper-scissors/MachinePlayer
+* @requires rock-paper-scissors/Player
+*/
+class MachinePlayer extends Player {
+  /**
+  * constructor for the MachinePlayer class
+  * @param {integer} luck - integer representing the luck (which
+  * controls the weapons avaialble to this machine)
+  * @constructor
+  */
+  constructor(luck) {
+    const machineid = process.hrtime()[1].toString().slice(-3);
+    super(`turing-machine-${machineid}`, luck, true);//  luck of machines is not depended on fate!!
+  }
+
+  /**
+  * randomly select a weapon from the armoury based on the luck
+  * @param {array} armoury array of weapons in this game
+  * @returns {string} name of a weapon
+  */
+  selectWeapon(armoury) {
+    //  higher luck means higher ranked weapons are returned, and no lower ranked weapons
+    const availableWeaponsStart = (this.luck >= armoury.length) ? armoury.length - 1 : this.luck;
+    const availableWeaponsEnd = armoury.length;
+    const seed = process.hrtime()[1].toString().slice(-3);
+    const randomeNumber = Math.random(seed);
+    const randomWeaponIndex = Math.floor((randomeNumber *//   generate a random
+        (availableWeaponsEnd - availableWeaponsStart)) +//    number between availableWeaponsStart
+                  availableWeaponsStart);//                   and availableWeaponsEnd
+    return this.setChosenWeapon(armoury[randomWeaponIndex].getName());
+  }
+}
+
+module.exports = MachinePlayer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jun 21 2018 08:39:36 GMT+0200 (W. Europe Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
