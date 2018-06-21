@@ -109,7 +109,7 @@
           </div>
         </nav>
         <div class="collection">
-            <a class="collection-item" data-ng-click="ChooseWeaponPlayer()" data-ng-repeat="weapon in armoury track by weapon.name">{{weapon.name}}</a>
+            <a class="collection-item" data-ng-click="ChooseWeaponPlayer(weapon.name)" data-ng-repeat="weapon in armoury track by weapon.name">{{weapon.name}}</a>
         </div>
     </script>
     <script type="text/ng-template" id="result">
