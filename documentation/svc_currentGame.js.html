@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>rock-paper-scissors/HumanPlayer - Documentation</title>
+    <title>svc/currentGame.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,142 +27,73 @@
 
 <div id="main">
     
-    <h1 class="page-title">rock-paper-scissors/HumanPlayer</h1>
+    <h1 class="page-title">svc/currentGame.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Game = require('../control/game.js');
+const HumanPlayer = require('../control/humanPlayer.js');
+const MachinPlayer = require('../control/machinePlayer.js');
+const weapons = require('../model/weapons.json');
+const weaponsExtended = require('../model/weaponsExtended.json');
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">A human player class that represents a single player playing the game</div>
-        
+const current = {
+  /**
+  * A singleton object that holds the current game being played
+  */
+  game: {},
 
-        
-            
+  /**
+  * The http request handler for initialising a game
+  * @param {object} req - the http request object
+  * @param {object} res - the http response object
+  * @returns {object} 200 OK if everything wenet well
+  */
+  initGame: (req, res) => {
+    let status = 200;
+    res.setHeader('Content-Type', 'application/json');
+    try {
+      const incomingBody = JSON.parse(req.body);
+      let player1;
+      let player2;
+      if (incomingBody.player1.type === 'human') {
+        player1 = new HumanPlayer(incomingBody.player1.name);
+      } else {
+        player1 = new MachinPlayer(incomingBody.gameLevel);
+      }
 
+      if (incomingBody.player2.type === 'human') {
+        player2 = new HumanPlayer(incomingBody.player2.name);
+      } else {
+        player2 = new MachinPlayer(incomingBody.gameLevel);
+      }
 
+      if (incomingBody.gameType === 'Extended') {
+        current.game = new Game(weaponsExtended);
+      } else {
+        current.game = new Game(weapons);
+      }
 
+      current.game.setPlayer1(player1);
+      current.game.setPlayer2(player2);
+    } catch (e) {
+      status = 500;
+    }
+    res.writeHead(status);
+    res.end();
+  },
+};
 
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="control_humanPlayer.js.html">control/humanPlayer.js</a>, <a href="control_humanPlayer.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li><a href="module-rock-paper-scissors_Player.html">module:rock-paper-scissors/Player</a></li>
-        </ul>
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = current;
+</code></pre>
+        </article>
+    </section>
 
 
 

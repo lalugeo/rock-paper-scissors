@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>rock-paper-scissors/HumanPlayer - Documentation</title>
+    <title>control/weapon.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,142 +27,63 @@
 
 <div id="main">
     
-    <h1 class="page-title">rock-paper-scissors/HumanPlayer</h1>
+    <h1 class="page-title">control/weapon.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* A generic weapon class that represents a object that can be included in the game
+* @module rock-paper-scissors/Weapon
+*/
+class Weapon {
+  /**
+  * constructor for the weapons class
+  * @param {string} name - name of the weapon
+  * @param {string} image - image url of the weapon
+  * @param {integer} rank - rank of the weapon, ideally corresponds to the array index
+  * @constructor
+  */
+  constructor(name, image, rank) {
+    this.name = name;
+    this.image = image;
+    this.rank = rank;
+  }
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">A human player class that represents a single player playing the game</div>
-        
+  /**
+  * getter for the name of the weapon
+  * @returns {string} name of the weapon
+  */
+  getName() {
+    return this.name;
+  }
 
-        
-            
+  /**
+  * getter for the image of the weapon
+  * @returns {string} image src url of the weapon
+  */
+  getImage() {
+    return this.image;
+  }
 
+  /**
+  * getter for the rank of the weapon
+  * @returns {integer} rank of the weapon
+  */
+  getRank() {
+    return this.rank;
+  }
+}
 
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="control_humanPlayer.js.html">control/humanPlayer.js</a>, <a href="control_humanPlayer.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-        <h3 class="subsection-title">Requires</h3>
-
-        <ul>
-            <li><a href="module-rock-paper-scissors_Player.html">module:rock-paper-scissors/Player</a></li>
-        </ul>
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="module-rock-paper-scissors_HumanPlayer-HumanPlayer.html">HumanPlayer</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = Weapon;
+</code></pre>
+        </article>
+    </section>
 
 
 
